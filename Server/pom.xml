@@ -16,6 +16,13 @@
 
 	<dependencies>
 	
+		<!-- Common -->
+		<dependency>
+			<groupId>org.devel.jerseyfx</groupId>
+			<artifactId>jerseyfx-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	
 		<!-- Logging -->
 		<dependency>
 			<groupId>log4j</groupId>

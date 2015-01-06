@@ -6,13 +6,14 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.devel.jerseyfx.server.rs.PeopleRestService;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
 public class Starter {
 
-	protected static final Logger logger = Logger.getLogger(Starter.class);
+	private static final Logger logger = Logger.getLogger(Starter.class);
 
 	public static void main(String[] args) {
 		PropertyConfigurator.configure("log4j.properties");
@@ -22,7 +23,7 @@ public class Starter {
 	private static void runGrizzly() {
 		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9000)
 				.build();
-		ResourceConfig config = new ResourceConfig(MyResource.class);
+		ResourceConfig config = new ResourceConfig(MyResource.class, PeopleRestService.class);
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, config, false);
 
 		// register shutdown hook
