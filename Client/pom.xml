@@ -12,11 +12,12 @@
 
 	<properties>
 		<mainClass.client>org.devel.jerseyfx.client.Starter</mainClass.client>
-		<maven.compiler.executable>c:\Program Files\Java\jdk1.8.0_05\bin/javac.exe</maven.compiler.executable>
+		<maven.compiler.executable>c:\Program
+			Files\Java\jdk1.8.0_05\bin/javac.exe</maven.compiler.executable>
 	</properties>
 
 	<dependencies>
-	
+
 		<!-- Common -->
 		<dependency>
 			<groupId>org.devel.jerseyfx</groupId>
@@ -24,12 +25,22 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
+		<!-- Logging -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
 		<!-- JAX-RS -->
 		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-rs-client</artifactId>
-			<version>3.0.2</version>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.cxf</groupId> -->
+		<!-- <artifactId>cxf-rt-rs-client</artifactId> -->
+		<!-- <version>3.0.2</version> -->
+		<!-- </dependency> -->
 
 		<!-- JavaFX -->
 		<!-- <dependency> -->
@@ -39,12 +50,12 @@
 		<!-- </dependency> -->
 
 		<!-- Test -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.loadui</groupId> -->
-<!-- 			<artifactId>testFx</artifactId> -->
-<!-- 			<version>3.0.0</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.loadui</groupId> -->
+		<!-- <artifactId>testFx</artifactId> -->
+		<!-- <version>3.0.0</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
 
 	</dependencies>
 
