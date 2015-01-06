@@ -2,16 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.devel</groupId>
-		<artifactId>JerseyFX</artifactId>
+		<groupId>org.devel.jerseyfx</groupId>
+		<artifactId>jerseyfx-main</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>Client</artifactId>
+	<artifactId>jerseyfx-client</artifactId>
 	<packaging>jar</packaging>
 	<name>JerseyFX-Client</name>
 
 	<properties>
-		<mainClass.client>org.devel.springfx.client.Starter</mainClass.client>
+		<mainClass.client>org.devel.jerseyfx.client.Starter</mainClass.client>
 		<maven.compiler.executable>c:\Program Files\Java\jdk1.8.0_05\bin/javac.exe</maven.compiler.executable>
 	</properties>
 
@@ -19,8 +19,8 @@
 	
 		<!-- Common -->
 		<dependency>
-			<groupId>org.devel</groupId>
-			<artifactId>Common</artifactId>
+			<groupId>org.devel.jerseyfx</groupId>
+			<artifactId>jerseyfx-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

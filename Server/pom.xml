@@ -2,71 +2,52 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.devel</groupId>
-		<artifactId>JerseyFX</artifactId>
+		<groupId>org.devel.jerseyfx</groupId>
+		<artifactId>jerseyfx-main</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>Server</artifactId>
+	<artifactId>jerseyfx-server</artifactId>
 	<packaging>jar</packaging>
 	<name>JerseyFX-Server</name>
 
 	<properties>
-		<mainClass.server>org.devel.springfx.server.Starter</mainClass.server>
+		<mainClass.server>org.devel.jerseyfx.server.Starter</mainClass.server>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.glassfish.jersey</groupId>
+				<artifactId>jersey-bom</artifactId>
+				<version>2.14</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
-	
-		<!-- Common -->
+		<!-- Logging -->
 		<dependency>
-			<groupId>org.devel</groupId>
-			<artifactId>Common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
 		</dependency>
-	
-		<!-- JAX-RS -->
+		<!-- Jersey -->
 		<dependency>
-			<groupId>org.apache.cxf</groupId>
-			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
-			<version>3.0.2</version>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<!-- use the following artifactId if you don't need servlet 2.x compatibility -->
+			<!-- artifactId>jersey-container-servlet</artifactId -->
 		</dependency>
+		<!-- JSON support -->
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-moxy</artifactId>
 		</dependency>
+		<!-- Grizzly -->
 		<dependency>
-			<groupId>cglib</groupId>
-			<artifactId>cglib-nodep</artifactId>
-			<version>2.2</version>
-		</dependency>
-
-		<!-- Spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>4.1.2.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.1.2.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>4.1.2.RELEASE</version>
-		</dependency>
-
-		<!-- Jetty -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>9.2.5.v20141112</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>9.2.5.v20141112</version>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-grizzly2-http</artifactId>
 		</dependency>
 	</dependencies>
 
