@@ -1,4 +1,4 @@
-package org.devel.jerseyfx.server;
+package org.devel.jerseyfx.server.rs;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

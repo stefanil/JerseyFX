@@ -14,7 +14,7 @@ public class PeopleService {
 
 	private static PeopleService instance;
 
-	private PeopleService() {
+	public PeopleService() {
 	}
 
 	public static PeopleService getInstance() {

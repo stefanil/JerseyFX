@@ -1,6 +1,7 @@
 package org.devel.springfx.client;
 
 import javax.ws.rs.ProcessingException;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.ResponseProcessingException;
@@ -26,6 +27,16 @@ public class Starter /* extends Application */{
 
 	private static void runClient() {
 
+//		SslConfigurator sslConfig = SslConfigurator.newInstance()
+//		        .trustStoreFile("./truststore_client")
+//		        .trustStorePassword("secret-password-for-truststore")
+//		        .keyStoreFile("./keystore_client")
+//		        .keyPassword("secret-password-for-keystore");
+//		SSLContext sslContext = sslConfig.createSSLContext();
+//		Client client = ClientBuilder.newBuilder().sslContext(sslContext).build();
+		Client client = ClientBuilder.newClient();
+		
+		
 		/*
 		 * Creating an arbitrary stub won't work!
 		 */
@@ -51,7 +62,7 @@ public class Starter /* extends Application */{
 		// }
 
 		// With jersey its all about a WebTarget ..
-		WebTarget target = ClientBuilder.newClient()
+		WebTarget target = client
 				.target("http://localhost:9000/").path("/people");
 
 		try {

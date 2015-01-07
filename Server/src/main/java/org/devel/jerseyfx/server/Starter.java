@@ -6,7 +6,8 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.devel.jerseyfx.server.rs.PeopleRestService;
+import org.devel.jerseyfx.server.rs.MyResource;
+import org.devel.jerseyfx.server.rs.People;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -23,7 +24,7 @@ public class Starter {
 	private static void runGrizzly() {
 		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9000)
 				.build();
-		ResourceConfig config = new ResourceConfig(MyResource.class, PeopleRestService.class);
+		ResourceConfig config = new ResourceConfig(MyResource.class, People.class);
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, config, false);
 
 		// register shutdown hook

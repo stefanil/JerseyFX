@@ -8,19 +8,9 @@ import org.devel.jerseyfx.server.services.PeopleService;
 import org.devel.springfx.common.model.Person;
 import org.devel.springfx.common.rs.IPeople;
 
-public class PeopleRestService implements IPeople {
+public class People implements IPeople {
 
 	private PeopleService peopleService = PeopleService.getInstance();
-
-	@Override
-	public Collection<Person> getPeople(final int page) {
-		return peopleService.getPeople(page, 5);
-	}
-
-	@Override
-	public Person getPeople(final String email) {
-		return peopleService.getByEmail(email);
-	}
 
 	@Override
 	public Response addPerson(// final UriInfo uriInfo, 
@@ -30,6 +20,16 @@ public class PeopleRestService implements IPeople {
 		return Response.ok().build();
 //		return		Response.created(
 //				uriInfo.getRequestUriBuilder().path(email).build()).build();
+	}
+
+	@Override
+	public Collection<Person> getPeople(final int page) {
+		return peopleService.getPeople(page, 5);
+	}
+
+	@Override
+	public Person getPeople(final String email) {
+		return peopleService.getByEmail(email);
 	}
 
 	@Override
