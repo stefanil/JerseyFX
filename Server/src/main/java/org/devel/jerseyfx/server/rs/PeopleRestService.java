@@ -4,11 +4,11 @@ import java.util.Collection;
 
 import javax.ws.rs.core.Response;
 
-import org.devel.jerseyfx.server.service.PeopleService;
+import org.devel.jerseyfx.server.services.PeopleService;
 import org.devel.springfx.common.model.Person;
-import org.devel.springfx.common.rs.IPeopleRestService;
+import org.devel.springfx.common.rs.IPeople;
 
-public class PeopleRestService implements IPeopleRestService {
+public class PeopleRestService implements IPeople {
 
 	private PeopleService peopleService = PeopleService.getInstance();
 

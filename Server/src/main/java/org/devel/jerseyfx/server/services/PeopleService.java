@@ -1,4 +1,4 @@
-package org.devel.jerseyfx.server.service;
+package org.devel.jerseyfx.server.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.devel.jerseyfx.server.exceptions.PersonAlreadyExistsException;
-import org.devel.jerseyfx.server.exceptions.PersonNotFoundException;
+import org.devel.springfx.common.exceptions.PersonAlreadyExistsException;
+import org.devel.springfx.common.exceptions.PersonNotFoundException;
 import org.devel.springfx.common.model.Person;
 
 public class PeopleService {
@@ -18,7 +18,7 @@ public class PeopleService {
 	}
 
 	public static PeopleService getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new PeopleService();
 		return instance;
 	}
@@ -50,9 +50,14 @@ public class PeopleService {
 
 	public Person addPerson(final String email, final String firstName,
 			final String lastName) {
-		final Person person = new Person(email);
-		person.setFirstName(firstName);
-		person.setLastName(lastName);
+		
+		final Person person = new Person(email, firstName, lastName,
+				new ArrayList<Person>() {
+					private static final long serialVersionUID = 3018131847446402380L;
+					{
+						add(new Person("generic.mother@mail.com"));
+					}
+				});
 
 		if (persons.putIfAbsent(email, person) != null) {
 			throw new PersonAlreadyExistsException(email);

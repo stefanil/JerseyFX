@@ -17,19 +17,12 @@ import javax.ws.rs.core.Response;
 
 import org.devel.springfx.common.model.Person;
 
-@Path("/people")
-public interface IPeopleRestService {
+@Path("people")
+public interface IPeople {
 
-	@Produces({ MediaType.APPLICATION_JSON })
-	@GET
-	public abstract Collection<Person> getPeople(
-			@QueryParam("page") @DefaultValue("1") final int page);
-
-	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{email}")
-	@GET
-	public abstract Person getPeople(@PathParam("email") final String email);
-
+	/*
+	 * POST == CREATE
+	 */
 	@Produces({ MediaType.APPLICATION_JSON })
 	@POST
 	public abstract Response addPerson(// @Context final UriInfo uriInfo,
@@ -37,14 +30,33 @@ public interface IPeopleRestService {
 			@FormParam("firstName") final String firstName,
 			@FormParam("lastName") final String lastName);
 
+	/*
+	 * GET == RECEIVE
+	 */
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{email}")
+	@Path("{email}")
+	@GET
+	public abstract Person getPeople(@PathParam("email") final String email);
+
+	@Produces({ MediaType.APPLICATION_JSON })
+	@GET
+	public abstract Collection<Person> getPeople(
+			@QueryParam("page") @DefaultValue("1") final int page);
+	
+	/*
+	 * PUT (ID known to the client) == UPDATE 
+	 */
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("{email}")
 	@PUT
 	public abstract Person updatePerson(@PathParam("email") final String email,
 			@FormParam("firstName") final String firstName,
 			@FormParam("lastName") final String lastName);
 
-	@Path("/{email}")
+	/*
+	 * DELETE
+	 */
+	@Path("{email}")
 	@DELETE
 	public abstract Response deletePerson(@PathParam("email") final String email);
 	
