@@ -4,22 +4,29 @@ import java.util.Collection;
 
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+import org.devel.jerseyfx.common.model.Person;
+import org.devel.jerseyfx.common.rs.IPeople;
 import org.devel.jerseyfx.server.services.PeopleService;
-import org.devel.springfx.common.model.Person;
-import org.devel.springfx.common.rs.IPeople;
 
 public class People implements IPeople {
 
+	private static final Logger logger = Logger.getLogger(People.class);
+
 	private PeopleService peopleService = PeopleService.getInstance();
 
+	// ########################### CRUD ###########################
+	
 	@Override
-	public Response addPerson(// final UriInfo uriInfo, 
+	public Response addPerson(
+			// final UriInfo uriInfo,
 			final String email,
-			final String firstName, final String lastName) {
+			final String firstName, 
+			final String lastName) {
 		peopleService.addPerson(email, firstName, lastName);
 		return Response.ok().build();
-//		return		Response.created(
-//				uriInfo.getRequestUriBuilder().path(email).build()).build();
+		// return Response.created(
+		// uriInfo.getRequestUriBuilder().path(email).build()).build();
 	}
 
 	@Override
@@ -28,7 +35,7 @@ public class People implements IPeople {
 	}
 
 	@Override
-	public Person getPeople(final String email) {
+	public Person getPerson(final String email) {
 		return peopleService.getByEmail(email);
 	}
 

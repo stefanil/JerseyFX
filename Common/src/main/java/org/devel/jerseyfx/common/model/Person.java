@@ -1,4 +1,4 @@
-package org.devel.springfx.common.model;
+package org.devel.jerseyfx.common.model;
 
 import java.util.List;
 

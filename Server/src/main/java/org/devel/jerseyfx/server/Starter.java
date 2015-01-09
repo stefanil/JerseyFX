@@ -8,9 +8,11 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.devel.jerseyfx.server.rs.MyResource;
 import org.devel.jerseyfx.server.rs.People;
+import org.devel.jerseyfx.server.rs.PeopleSecure;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 public class Starter {
 
@@ -22,9 +24,17 @@ public class Starter {
 	}
 
 	private static void runGrizzly() {
-		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9000)
+		// default
+//		URI baseUri = UriBuilder.fromUri("http://localhost/").port(9000)
+//				.build();
+		// secure
+		URI baseUri = UriBuilder.fromUri("https://localhost/").port(443)
 				.build();
-		ResourceConfig config = new ResourceConfig(MyResource.class, People.class);
+		ResourceConfig config = new ResourceConfig(
+				// rest resources
+				PeopleSecure.class,
+				// Securing JAX-RS resources with standard javax.annotation.security annotations
+				RolesAllowedDynamicFeature.class);
 		HttpServer server = GrizzlyHttpServerFactory.createHttpServer(baseUri, config, false);
 
 		// register shutdown hook

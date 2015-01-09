@@ -1,4 +1,4 @@
-package org.devel.springfx.common.exceptions;
+package org.devel.jerseyfx.common.exceptions;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

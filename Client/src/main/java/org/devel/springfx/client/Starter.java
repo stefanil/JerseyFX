@@ -1,5 +1,6 @@
 package org.devel.springfx.client;
 
+import javax.net.ssl.SSLContext;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,7 +14,8 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.devel.springfx.common.model.Person;
+import org.devel.jerseyfx.common.model.Person;
+import org.glassfish.jersey.SslConfigurator;
 
 public class Starter /* extends Application */{
 
@@ -27,15 +29,29 @@ public class Starter /* extends Application */{
 
 	private static void runClient() {
 
-//		SslConfigurator sslConfig = SslConfigurator.newInstance()
-//		        .trustStoreFile("./truststore_client")
-//		        .trustStorePassword("secret-password-for-truststore")
-//		        .keyStoreFile("./keystore_client")
-//		        .keyPassword("secret-password-for-keystore");
-//		SSLContext sslContext = sslConfig.createSSLContext();
-//		Client client = ClientBuilder.newBuilder().sslContext(sslContext).build();
-		Client client = ClientBuilder.newClient();
+		WebTarget target = createTargetSecure();
+//		WebTarget target = createTargetDefault();
+
+		try {
+			createPerson(target);
+			readPerson(target);
+			updatePerson(target);
+			deletePerson(target);
+		} catch (ResponseProcessingException e) {
+			e.printStackTrace();
+		} catch (ProcessingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+
+	}
+
+	private static WebTarget createTargetDefault() {
 		
+		Client client = ClientBuilder.newClient();
 		
 		/*
 		 * Creating an arbitrary stub won't work!
@@ -64,22 +80,21 @@ public class Starter /* extends Application */{
 		// With jersey its all about a WebTarget ..
 		WebTarget target = client
 				.target("http://localhost:9000/").path("/people");
+		
+		return target;
+	}
 
-		try {
-			createPerson(target);
-			readPerson(target);
-			updatePerson(target);
-			deletePerson(target);
-		} catch (ResponseProcessingException e) {
-			e.printStackTrace();
-		} catch (ProcessingException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-
+	private static WebTarget createTargetSecure() {
+		SslConfigurator sslConfig = SslConfigurator.newInstance();
+//		        .trustStoreFile("./truststore_client")
+//		        .trustStorePassword("secret-password-for-truststore")
+//		        .keyStoreFile("./keystore_client")
+//		        .keyPassword("secret-password-for-keystore");
+		SSLContext sslContext = sslConfig.createSSLContext();
+		Client client = ClientBuilder.newBuilder().sslContext(sslContext).build();
+		WebTarget target = client
+				.target("https://localhost/").path("/people");
+		return target;
 	}
 
 	private static void createPerson(WebTarget target) throws Exception {

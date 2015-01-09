@@ -1,4 +1,4 @@
-package org.devel.springfx.common.rs;
+package org.devel.jerseyfx.common.rs;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.devel.springfx.common.model.Person;
+import org.devel.jerseyfx.common.model.Person;
 
 @Path("people")
 public interface IPeople {
@@ -25,7 +25,7 @@ public interface IPeople {
 	 */
 	@Produces({ MediaType.APPLICATION_JSON })
 	@POST
-	public abstract Response addPerson(// @Context final UriInfo uriInfo,
+	public abstract Response addPerson(
 			@FormParam("email") final String email,
 			@FormParam("firstName") final String firstName,
 			@FormParam("lastName") final String lastName);
@@ -36,15 +36,15 @@ public interface IPeople {
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{email}")
 	@GET
-	public abstract Person getPeople(@PathParam("email") final String email);
+	public abstract Person getPerson(@PathParam("email") final String email);
 
 	@Produces({ MediaType.APPLICATION_JSON })
 	@GET
 	public abstract Collection<Person> getPeople(
 			@QueryParam("page") @DefaultValue("1") final int page);
-	
+
 	/*
-	 * PUT (ID known to the client) == UPDATE 
+	 * PUT (ID known to the client) == UPDATE
 	 */
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Path("{email}")
